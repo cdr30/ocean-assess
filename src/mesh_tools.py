@@ -180,7 +180,7 @@ class mesh(object):
 
         Arguments:
             grid-
-                One of 't', 'w'
+                One of 't', 'w', 'u', or 'v'
 
         Keywords:
             levels-
@@ -191,7 +191,9 @@ class mesh(object):
         Returns:
             gdep, the 1D depth coordinate sliced by the requested vertical levels.
         '''
-        
+        if grid in ['u', 'v']:
+            grid = 't'
+
         var = None
         gdepx_1d = 'gdep%s_1d' % grid.lower()
         gdepx_0 = 'gdep%s_0' % grid.lower()
