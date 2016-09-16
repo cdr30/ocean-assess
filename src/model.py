@@ -89,7 +89,6 @@ class Model(object):
         '''
         Generate dictionaries of FileDateLists for each meaning period and grid type
         '''
-                
         self.filedates={}
         for grid in ['T','U','V','W','ptr']:
             self.filedates[grid]={}
@@ -177,6 +176,13 @@ class Model(object):
     
         return info, datadirs
        
+    def _check_obsname(self, obsname):
+        ''' Check for None values '''
+        if obsname.lower() == 'none':
+            obsname = None
+
+        return obsname
+        
     def _read_metrics(self, csvfile):
         '''
         Read in Metrics from CSV file and parse into dictionaries
@@ -200,7 +206,7 @@ class Model(object):
                         metrics.append({'metric': row[0].strip(), 
                                         'period': row[1].strip().split(), 
                                         'type': row[2].strip(), 
-                                        'obsname': row[3].strip(), 
+                                        'obsname': self._check_obsname(row[3].strip()),
                                         'plot_domain': row[4].strip().split(),
                                         'metric_domain': row[5].strip().split()})
         except IOError:

@@ -25,7 +25,7 @@ def run(expt):
     '''
     Carry out each of the metrics specified in metrics 
     '''
-    #Make output directory (if it doesn't already exist)
+        #Make output directory (if it doesn't already exist)
     out_dir = make_out_dir(expt)
     
     # Set up the logger

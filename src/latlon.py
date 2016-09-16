@@ -1,3 +1,5 @@
+
+
 # -*- coding: iso-8859-1 -*-
 '''
 Produce maps of scalar model fields
@@ -162,7 +164,7 @@ def make_table(expt, metric, field):
     else:
         table.append(['Domain', 
                       expt.runid + '\n mean',
-                      metric['obsname'] + '\n mean',
+                      str(metric['obsname']) + '\n mean',
                       expt.runid + '\n RMS error'])
     
     for domain in metric_domains:
@@ -336,7 +338,7 @@ class map_field():
         Read in variable from self.mean_file for correct levels only (if 3D field)
         Or if multi_field_function is set then get the field (e.g.) maximum from the set of fields in meanfiles
 	    '''
-        
+        # import pdb; pdb.set_trace()
         # Get all required mean files
         if multi_field_function is None:
             files = [self.meandir + '/' + self.meanfile]
@@ -457,25 +459,20 @@ class map_field():
         # Plotting method
         method = self.items.get('contour_method', 'mesh')
 
-#TODO: Need to account for self.obs being None here 
-        #Plot field first
+        #import pdb; pdb.set_trace()
         if self.cntl is None:
             self.map_self(subplot=211, projection=projection, region=region, method=method)
+            if self.obs is not None:
+                self.map_obs_diff(subplot=212, projection=projection, region=region, method=method)
+
         else:
             self.map_self(subplot=221, projection=projection, region=region, method=method)
-            
-        #Plot field - obs next
-        if self.cntl is None:
-            self.map_obs_diff(subplot=212, projection=projection, region=region, method=method)
-        else:
-            self.map_obs_diff(subplot=224, projection=projection, region=region, method=method)
-        
-        if self.cntl is not None:
-            #Plot expt - cntl
             self.map_model_diff(subplot=222, projection=projection, region=region, method=method)
-        
-            #Plot cntl - obs
-            self.cntl.map_obs_diff(subplot=223, projection=projection, region=region, method=method)
+            
+            if self.obs is not None:
+                self.cntl.map_obs_diff(subplot=223, projection=projection, region=region, method=method)
+                self.map_obs_diff(subplot=224, projection=projection, region=region, method=method)
+
         
 
     def map_self(self, subplot=111, region=None, method='mesh', **kwargs):
@@ -548,6 +545,8 @@ class map_field():
         Should we regrid the model to obs grid here?
         Probably should it's harder to do (and slower)
         '''
+        
+        
         levs = self.items.get('contour_levels_obs')
         if levs is not None:
             exec "levs="+levs
@@ -560,7 +559,9 @@ class map_field():
         else: 
             cmap = plt.cm.RdBu_r
  
+        #import pdb; pdb.set_trace()
         diff_field = self.field-self.obs_field
+        
         if self.multi_field_function=='argmax' or self.multi_field_function=='argmin':
         # Fields are months so make maximum difference +/- 6
             diff_field[diff_field > 6] -= 12
@@ -593,29 +594,32 @@ class map_field():
         '''
         Calculate the area weighted mean of obs field over specified domain
         '''
-        
-        err = 'cannot calculate observation mean'
-        if domain is not 'global' and domain not in self.expt.domains:
-            io_utils.warn('Undefined domain specified; ' + err)
+        if self.obs is None:
             return np.nan
-
-        area = self.get_area() * self.get_domain_mask(domain)
-        
-        return (self.obs_field * area).sum()/area.sum()
+        else:
+            err = 'cannot calculate observation mean'
+            if domain is not 'global' and domain not in self.expt.domains:
+                io_utils.warn('Undefined domain specified; ' + err)
+                return np.nan
+                
+            area = self.get_area() * self.get_domain_mask(domain)
+            return (self.obs_field * area).sum()/area.sum()
  
 
     def obs_rms(self, domain = 'global'):
         '''
         Calculate the RMS difference between field and observations for specified domain
         '''
-        
-        err = 'cannot calculate model RMS error'
-        if domain is not 'global' and domain not in self.expt.domains:
-            io_utils.warn('Undefined domain specified; ' + err)
+        if self.obs is None:
             return np.nan
+        else:
+            err = 'cannot calculate model RMS error'
+            if domain is not 'global' and domain not in self.expt.domains:
+                io_utils.warn('Undefined domain specified; ' + err)
+                return np.nan
         
-        area = self.get_area() * self.get_domain_mask(domain)
-        return (((self.field-self.obs_field)**2 * area).sum() / area.sum())**0.5
+            area = self.get_area() * self.get_domain_mask(domain)
+            return (((self.field-self.obs_field)**2 * area).sum() / area.sum())**0.5
 
     def mod_rms(self, domain = 'global'):
         '''

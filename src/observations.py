@@ -68,7 +68,6 @@ class Obs(object):
 	                    
 	    Returns a numpy array of dimensions (z, x).
 	    '''
-        
         if xsect_class is not None:
             xsect_points = xsect_class.points
         

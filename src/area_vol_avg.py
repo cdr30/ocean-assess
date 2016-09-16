@@ -123,12 +123,13 @@ class Avg_TS(object):
             code = p1.wait()
             if code != 0:
                 raise AreaVolAvgError('Call to CDFMEANVAR failed with error "' + stderr+'"')
-            results = results.split('\n')[:-1] #Don't want empty row at end
+            lines = results.strip().split('\n')
             means = {}
             for domain in domains: 
                 means[domain] = []
-            for line in results[1:]:
-                means[ line.split()[0] ].append(line.split()[1])
+            for line in lines:
+                if line.split()[0] in domains:
+                    means[line.split()[0]].append(line.split()[1])
              
             return means  
         except OSError as err:

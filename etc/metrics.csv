@@ -1,63 +1,85 @@
 # Metric, Period, Type, Obsname, Plot_Domain, Metric_Domain
 
-# Temperature
-sst,                      1y, mean, CCI_SST,              global,                                             all
-t_0_10m,                  1y, mean, EN4_v1.1_temperature, global,                                             all
-t_100m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
-t_200m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
-t_300m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
-t_400m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
-t_500m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
-t_1000m,                  1y, mean, EN4_v1.1_temperature, global,                                             all
-t_0_200m,                 1y, mean, EN4_v1.1_temperature, global,                                             all
-t_0_700m,                 1y, mean, EN4_v1.1_temperature, global,                                             all
-Txsect_zonal,             1y, mean, EN4_v1.1_temperature, global atlantic pacific indian,                     global atlantic pacific indian
-Txsect_zonal_0_700m,      1y, mean, EN4_v1.1_temperature, global atlantic pacific indian,                     global atlantic pacific indian
-Txsect_meridional,        1y, mean, EN4_v1.1_temperature, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
-Txsect_meridional_0_700m, 1y, mean, EN4_v1.1_temperature, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
-sst,                      1y, ts,   None,                 global,                                             None
-t_full,                   1y, ts,   None,                 global,                                             None
+# TEMPERATURE
+#sst,                      1y, mean, CCI_SST,                atlantic,                                             all
+# t_100m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_200m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_300m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_400m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_500m,                   1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_1000m,                  1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_2000m,                  1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_3000m,                  1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_0_100m,                 1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_0_200m,                 1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_0_700m,                 1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_700_2000m, 		  1y, mean, EN4_v1.1_temperature, global,                                             all
+# t_2000_6000m,             1y, mean, EN4_v1.1_temperature, global,                                             all
+# Txsect_zonal,             1y, mean, EN4_v1.1_temperature, global atlantic pacific indian,                     global atlantic pacific indian
+# Txsect_zonal_0_300m,      1y, mean, EN4_v1.1_temperature, global atlantic pacific indian,                     global atlantic pacific indian
+# Txsect_zonal_0_700m,      1y, mean, EN4_v1.1_temperature, global atlantic pacific indian,                     global atlantic pacific indian
+# Txsect_meridional,        1y, mean, EN4_v1.1_temperature, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
+# Txsect_meridional_0_300m, 1y, mean, EN4_v1.1_temperature, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
+# Txsect_meridional_0_700m, 1y, mean, EN4_v1.1_temperature, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
+# sst,                      1y, ts,   None,                 global,                                             all
+# t_0_100m,                 1y, ts,   None,          	  global,                                             all
+# t_0_200m,                 1y, ts,   None,                 global,                                             all
+# t_0_700m,                 1y, ts,   None,                 global,                                             all
+# t_700_2000m, 	            1y, ts,   None,                 global,                                             all
+# t_2000_6000m,             1y, ts,   None,                 global,                                             all
+# t_full,                   1y, ts,   None,                 global,                                             all
 
-# Salinity
-sss,                      1y, mean, EN4_v1.1_salinity, global,                                             all
-s_0_10m,                  1y, mean, EN4_v1.1_salinity, global,                                             all
-s_100m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
-s_200m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
-s_300m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
-s_400m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
-s_500m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
-s_1000m,                  1y, mean, EN4_v1.1_salinity, global,                                             all
-s_0_200m,                 1y, mean, EN4_v1.1_salinity, global,                                             all
-s_0_700m,                 1y, mean, EN4_v1.1_salinity, global,                                             all
-Sxsect_zonal,             1y, mean, EN4_v1.1_salinity, global atlantic pacific indian,                     global atlantic pacific indian
-Sxsect_zonal_0_700m,      1y, mean, EN4_v1.1_salinity, global atlantic pacific indian,                     global atlantic pacific indian
-Sxsect_meridional,        1y, mean, EN4_v1.1_salinity, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
-Sxsect_meridional_0_700m, 1y, mean, EN4_v1.1_salinity, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
-sss,                      1y, ts,   None,              global,                                             None
-s_full,                   1y, ts,   None,              global,                                             None
+
+# SALINITY
+# sss,                      1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_100m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_200m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_300m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_400m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_500m,                   1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_1000m,                  1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_2000m,                  1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_3000m,                  1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_0_100m,                 1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_0_200m,                 1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_0_700m,                 1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_700_2000m,              1y, mean, EN4_v1.1_salinity, global,                                             all
+# s_2000_6000m,             1y, mean, EN4_v1.1_salinity, global,                                             all
+# Sxsect_zonal,             1y, mean, EN4_v1.1_salinity, global atlantic pacific indian,                     global atlantic pacific indian
+# Sxsect_zonal_0_700m,      1y, mean, EN4_v1.1_salinity, global atlantic pacific indian,                     global atlantic pacific indian
+# Sxsect_meridional,        1y, mean, EN4_v1.1_salinity, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
+# Sxsect_meridional_0_700m, 1y, mean, EN4_v1.1_salinity, tropical_atlantic tropical_pacific tropical_indian, tropical_atlantic tropical_pacific tropical_indian
+# sss,                      1y, ts,   None,                 all,                                             all
+# s_0_100m,                 1y, ts,   None,          	  global,                                             all
+# s_0_200m,                 1y, ts,   None,                 global,                                             all
+# s_0_700m,                 1y, ts,   None,                 global,                                             all
+# s_700_2000m, 	            1y, ts,   None,                 global,                                             all
+# s_2000_6000m,             1y, ts,   None,                 global,                                             all
+# s_full,                   1y, ts,   None,                 global,                                             all
 
 # SSH
-#ssh, 1y, mean, None, global, all
-ssh, 1y, ts, None, global, None
+ssh, 1y, mean, None, global, all
+#ssh, 1y, ts,   None, global, all
 
 # MLD
 #mld, 1y, mean, None, global, all
-mld_min, 1m, ann_min, DBM_mixed_layer_depth_var, global, all
-mld_max, 1m, ann_max, DBM_mixed_layer_depth_var, global, all
+# mld_min, 1m, ann_min, DBM_mixed_layer_depth_var, global, all
+# mld_max, 1m, ann_max, DBM_mixed_layer_depth_var, global, all
 
-# Surface forcing
-net_sfc_heat_flux,           1y, mean, NOC_1.1a_sfc_net_heat_flux, global, all
-#sfc_zonal_wind_stress,      1y, mean, None,                      global, all
-#sfc_meridional_wind_stress, 1y, mean, None,                      global, all
+# SURFACE FORCING
+#net_sfc_heat_flux,          1y, mean, NOC_1.1a_sfc_net_heat_flux, global, all
+#sfc_zonal_wind_stress,      1y, mean, None,                       global, all
+#sfc_meridional_wind_stress, 1y, mean, None,                       global, all
 #sfc_wind_stress,            1y, mean, None,                      global, all
-net_sfc_heat_flux,           1y, ts,   None,                      global, None
+#net_sfc_heat_flux,          1y, ts,   None,                       global, all
 
-# AMOC
-amoc, 1y, mean, None, Atlantic, Atlantic
-amoc_26n, 1y, ts, None, Atlantic, Atlantic
-amoc_34s, 1y, ts, None, Atlantic, Atlantic
+# OVERTURNING CIRCULATION
+#amoc, 1y, mean, None, Atlantic, Atlantic
+#amoc_26n, 1y, ts, None, Atlantic, Atlantic
+#amoc_34s, 1y, ts, None, Atlantic, Atlantic
+#amoc_26n_depth_zero, 1y, ts, None, Atlantic, Atlantic
 
-# Currents
+# CURRENTS
 #Uxsect_zonal_20NS_0_700m,      1y, mean, None, global, global
 #Uxsect_meridional_20NS_0_700m, 1y, mean, None, global, global
 #Vxsect_zonal_20NS_0_700m,      1y, mean, None, global, global

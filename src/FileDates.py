@@ -7,6 +7,7 @@ Created on Nov 21, 2013
 from netCDF4 import Dataset, num2date, date2num 
 import numpy as np
 import os
+import datetime
 
 class FileDatesError(Exception):
     pass
@@ -149,15 +150,24 @@ class FileDatesList(list):
         ''' Return str string for each of the FileDates in list'''
         return "\n".join([str(filedate) for filedate in self])
 
+    def datetimeref(self):
+        ''' Return reference time string for date2num conversions '''
+        
+        dt = self.dates()[0]
+        return 'seconds since %04i-01-01 00:00:00' % dt.year
+      
+
     def sort(self):
         '''
         Sort FileDateList into date order
         '''
+  
+
         calendar = list(set(self.calendars()))
         if len(calendar) != 1:
             raise RuntimeError("In sort_file_dates: all file_date tuples must have same calendar")
 
-        nums = np.array([date2num(date, 'seconds since 0000-00-00 00:00:00', calendar[0]) for date in self.dates()])
+        nums = np.array([date2num(date, self.datetimeref(), calendar[0]) for date in self.dates()])
         index = nums.argsort()
     
         return FileDatesList([self[i] for i in index])
@@ -172,10 +182,15 @@ class FileDatesList(list):
         calendars = list(set(self.calendars()))
         if len(calendars) != 1:
             raise RuntimeError("In file_dates_in_range: all file_date tuples must have same calendar")
+            
+    
         
-        startnum = date2num( start, 'seconds since 0000-00-00 00:00:00', self[0].calendar )
-        endnum = date2num( end, 'seconds since 0000-00-00 00:00:00', self[0].calendar )
-        dates_num = np.array([date2num(date, 'seconds since 0000-00-00 00:00:00', self[0].calendar) for date in self.dates()])
+        start_dt = datetime.datetime(start.year, start.month, start.day)
+        end_dt = datetime.datetime(end.year, end.month, end.day)
+
+        startnum = date2num(start_dt, self.datetimeref(), self[0].calendar)
+        endnum = date2num(end_dt, self.datetimeref(), self[0].calendar)
+        dates_num = np.array([date2num(date, self.datetimeref(), self[0].calendar) for date in self.dates()])
         
         ind = np.where( (dates_num >= startnum) & (dates_num <= endnum) )
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env python2.7
 
-
 import argparse
 import os
 from src.model import Model
+
 
 def main():
     '''
@@ -16,7 +16,6 @@ def main():
     '''
     #Parse input arguments
     args = get_arguments()
-    
     expt = Model(args.expt, 
                  args.metrics, 
                  args.domains, 
@@ -24,7 +23,6 @@ def main():
                  args.obs, 
                  args.items, 
                  cntl = args.cntl)
-    
     expt.assess()
     
 def get_arguments():
