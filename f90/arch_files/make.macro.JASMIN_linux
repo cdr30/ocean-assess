@@ -1,0 +1,13 @@
+# Makefile for CDFTOOLS
+#    $Rev: 173 $
+#    $Date: 2008-03-17 11:42:21 +0100 (Mon, 17 Mar 2008) $
+# --------------------------------------------------------------
+#
+
+
+
+F90=ifort
+
+NCDF = -Wl,-rpath,$(NETCDF_FORTRAN_ROOT)/lib,-rpath,$(LD_LIBRARY_PATH) -I$(NETCDF_FORTRAN_ROOT)/include -L$(NETCDF_FORTRAN_ROOT)/lib -lnetcdff
+
+FFLAGS= -O2 -ip -mp1 -fpe0 $(NCDF) -assume byterecl -convert big_endian -parallel

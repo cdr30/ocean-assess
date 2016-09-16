@@ -1,0 +1,41 @@
+### To be kept updated with all reasonable possible metric types
+
+# Global lat-lon field tests
+latlon_2D,              1y, mean,       DBM_mixed_layer_depth_var, global, all
+latlon_2D_minmax,       1m, ann_min,    DBM_mixed_layer_depth_var, global, all
+latlon_2D_minmax,       1m, ann_argmin, DBM_mixed_layer_depth_var, global, all
+latlon_2D_minmax,       1m, ann_max,    DBM_mixed_layer_depth_var, global, all
+latlon_2D_minmax,       1m, ann_argmax, DBM_mixed_layer_depth_var, global, all
+latlon_3D,              1y, mean,       EN4_v1.1_temperature,      global, all
+latlon_3D_zavg,         1y, mean,       EN4_v1.1_temperature,      global, all
+latlon_3D_zavg_implied, 1y, mean,       EN4_v1.1_temperature,      global, all
+
+# MOC mean and timeseries tests
+nemo_moc_tools_mean,              1y, mean, None, Atlantic, Atlantic
+nemo_moc_tools_ts_26n,            1y, ts,   None, Atlantic, Atlantic
+nemo_moc_tools_ts_26n_depth_zero, 1y, ts,   None, Atlantic, Atlantic
+nemo_moc_tools_ts_34s,            1y, ts,   None, global,   global
+
+# Area and volume average timeseries tests
+area_avg, 1y, ts, None, all, None
+vol_avg,  1y, ts, None, all, None
+
+# Cross section tests
+sect_fixed_lon,                                1y, mean, EN4_v1.1_temperature, global, all
+sect_fixed_lat,                                1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_line,                               1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_line_bounded_by_i,                  1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_line_bounded_by_lon,                1y, mean, EN4_v1.1_temperature, global, all
+sect_meridional_line,                          1y, mean, EN4_v1.1_temperature, global, all
+sect_meridional_line_bounded_by_j,             1y, mean, EN4_v1.1_temperature, global, all
+sect_meridional_line_bounded_by_lat,           1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_specified_by_i,                1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_bounded_by_j,                  1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_specified_by_lon,              1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_bounded_by_lat,                1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_specified_by_i_bounded_by_lat, 1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_specified_by_lon_bounded_by_j, 1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_bounded_by_j_and_lat,          1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_0-700m,                        1y, mean, EN4_v1.1_temperature, global, all
+sect_zonal_mean_100-700m,                      1y, mean, EN4_v1.1_temperature, global, all
+sect_meridional_mean_specified_by_j,           1y, mean, EN4_v1.1_temperature, global, all
