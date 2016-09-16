@@ -26,8 +26,7 @@ def cross_section(expt, metric, items, out_dir):
     '''
     Create plots of and calculate metrics for cross sections
     '''
-    
-#TODO: This preamble common to the metrics modules could be condensed 
+    #TODO: This preamble common to the metrics modules could be condensed 
     
     # Get metric periods
     periods = metric['period'][:]
@@ -101,7 +100,7 @@ def make_figures(expt, metric, out_dir, field, period):
             fig=plot_tools.figure_setup('four_panel')
         else:
             fig=plot_tools.figure_setup('two_panel')
-            
+        
         field.plot_sections(fig=fig, domain=domain)
         plt.savefig(fname)
         thisplotlist.append(fname)
@@ -128,14 +127,14 @@ def make_table(expt, metric, field):
         table.append(['Domain', 
                       expt.runid + '\n mean',
                       expt.cntl.runid + '\n mean',
-                      metric['obsname'] + '\n mean',
+                      str(metric['obsname']) + '\n mean',
                       expt.runid + '\n RMS error',
                       expt.cntl.runid + '\n RMS error',
                       'RMS model difference'])
     else:
         table.append(['Domain', 
                       expt.runid + '\n mean',
-                      metric['obsname'] + '\n mean',
+                      str(metric['obsname']) + '\n mean',
                       expt.runid + '\n RMS error'])
     
     # Add metric values to table, one row per metric domain
@@ -827,20 +826,20 @@ class CrossSection(object):
         if fig is None:
             fig = plt.gcf()
         
-        is_cntl = self.cntl is not None
+        use_cntl = self.cntl is not None
+        use_obs = self.obs is not None
         
-        # Plot expt
-        subplot = (211, 221)[is_cntl]
-        self.plot_panel('self', subplot, domain)
-        
-        # Plot expt - obs
-        subplot = (212, 224)[is_cntl]
-        self.plot_panel('obs', subplot, domain)
-        
-        # Plot expt - cntl
-        if is_cntl:
+        # Plot expts
+        if use_cntl:
+            self.plot_panel('self', 221, domain)
             self.plot_panel('diff', 222, domain)
-            self.cntl.plot_panel('obs', 223, domain)
+            if use_obs:
+                self.plot_panel('obs', 224, domain)
+                self.cntl.plot_panel('obs', 223, domain)
+        else:
+            self.plot_panel('self', 211, domain)
+            if use_obs:
+                self.plot_panel('obs', 212, domain)
         
         # Main figure title
         main_title = '%s (%s)'
@@ -948,38 +947,41 @@ class CrossSection(object):
         '''
         Calculate the area-weighted mean of obs field over specified domain
         '''
-        
-        err = 'cannot calculate observation mean'
-        if (domain is not 'global') and (domain not in self.obs_field):
-            io_utils.warn('Undefined domain specified; ' + err)
+        if self.obs is None:
             return np.nan
-        if not hasattr(self, 'obs_field'):
-            io_utils.warn('No observations specified; ' + err)
-            return np.nan
+        else:
+            err = 'cannot calculate observation mean'
+            if (domain is not 'global') and (domain not in self.obs_field):
+                io_utils.warn('Undefined domain specified; ' + err)
+                return np.nan
+            if not hasattr(self, 'obs_field'):
+                io_utils.warn('No observations specified; ' + err)
+                return np.nan
         
-        area = self.face_areas[domain]
-        
-        return (self.obs_field[domain] * area).sum() / area.sum()
+            area = self.face_areas[domain]
+            return (self.obs_field[domain] * area).sum() / area.sum()
  
     def obs_rms(self, domain='global'):
         '''
         Calculate the area-weighted RMS difference between field and observations for specified domain
         '''
-        
-        err = 'cannot calculate model RMS error'
-        if (domain is not 'global') and (domain not in self.expt.domains) and (domain not in self.obs_field):
-            io_utils.warn('Undefined domain specified; ' + err)
+        if self.obs is None:
             return np.nan
-        if not hasattr(self, 'obs_field'):
-            io_utils.warn('No observations specified; ' + err)
-            return np.nan
-        if self.field[domain].shape != self.obs_field[domain].shape:
-            io_utils.warn('Grids do not match; ' + err)
-            return np.nan
+        else:
+            err = 'cannot calculate model RMS error'
+            if (domain is not 'global') and (domain not in self.expt.domains) and (domain not in self.obs_field):
+                io_utils.warn('Undefined domain specified; ' + err)
+                return np.nan
+            if not hasattr(self, 'obs_field'):
+                io_utils.warn('No observations specified; ' + err)
+                return np.nan
+            if self.field[domain].shape != self.obs_field[domain].shape:
+                io_utils.warn('Grids do not match; ' + err)
+                return np.nan
         
-        area = self.face_areas[domain]
+            area = self.face_areas[domain]
         
-        return ((area * (self.field[domain] - self.obs_field[domain]) ** 2.).sum() / area.sum()) ** 0.5
+            return ((area * (self.field[domain] - self.obs_field[domain]) ** 2.).sum() / area.sum()) ** 0.5
 
     def mod_rms(self, domain='global'):
         '''
