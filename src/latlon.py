@@ -249,7 +249,6 @@ class map_field():
                                                                    self.multi_field_function)
             
         if expt.cntl is not None:
-            import pdb; pdb.set_trace()
             self.cntl = map_field(expt.cntl, period, obs, items, multi_field_function)
         else:
             self.cntl = None

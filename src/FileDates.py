@@ -8,6 +8,7 @@ from netCDF4 import Dataset, num2date, date2num
 import numpy as np
 import os
 import datetime
+import warnings
 
 class FileDatesError(Exception):
     pass
@@ -57,8 +58,15 @@ def get_file_date(fname):
 
         # Return an empty list if the file is empty
         if time.size != 0:
-            dates = num2date(time[:], time.units, time.calendar)
-            return FileDatesList([FileDate(date, time.calendar, fname, i) 
+            
+            # Use "gregorian" if calendar attribute not set
+            try:
+                calendar = time.calendar
+            except AttributeError:
+                calendar = "gregorian"
+
+            dates = num2date(time[:], time.units, calendar)
+            return FileDatesList([FileDate(date, calendar, fname, i) 
                                   for i, date in enumerate(dates)])
         else:
             return [] 
@@ -102,7 +110,10 @@ def File_Dates(fnames):
     if isinstance(fnames, (str, unicode)): 
         fnames = [fnames] 
     for fname in fnames:
-        outlist.extend(get_file_date(fname))
+        try:
+            outlist.extend(get_file_date(fname))
+        except:
+            import pdb; pdb.set_trace()
     if len(outlist) != 0:
         outlist.sort()
     return outlist
