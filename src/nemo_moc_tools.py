@@ -132,8 +132,8 @@ def assess_moc(model, metric, items, out_dir):
         for i, run in enumerate(runs):
             time_series = run.plot_ts(ts_func, date_range = None,
                                       lat_range=lat, color=['k','r'][i])
-            mean.append(np.array(time_series).mean())
-            stdev.append(np.array(time_series).std())
+            mean.append(np.nanmean(np.array(time_series)))
+            stdev.append(np.nanstd(np.array(time_series)))
         
         main_title = '%s (%s)'
         plt.suptitle(main_title % (items['title'], plot_domain), fontsize = 14)
@@ -510,9 +510,16 @@ def moc_depth_zero(field,fld_lat,fld_depth,lat):
         raise TypeError("In nemo_moc.moc_max: lat must be float or integer")
     
     #May have to think more carefully about upper ocean cells if this is to be used in tropics
-    ind=min(np.where(field[:,lat_ind] < 0)[0])
-    
-    #Linearly interpolate between adjacent values
-    #TODO: put this on a separate line
-    return fld_depth[ind-1]+(fld_depth[ind]-fld_depth[ind-1])*field[ind-1,lat_ind]/(field[ind-1,lat_ind]-field[ind,lat_ind])
-    
+        
+    inds = np.where(field[:,lat_ind] < 0)[0]
+    if len(inds) > 0:
+        ind = min(inds)
+        # Lin interp to find zero depth
+        dz = fld_depth[ind] - fld_depth[ind-1]
+        df = field[ind-1,lat_ind] - field[ind,lat_ind]
+        z0 = fld_depth[ind-1] + ( (dz * field[ind-1,lat_ind]) / df )
+    else:
+        z0 = np.ones_like(field[0,lat_ind]) # Needs to have same shape for nanmean
+        z0[:] = np.nan 
+
+    return z0
