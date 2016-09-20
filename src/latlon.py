@@ -157,7 +157,7 @@ def make_table(expt, metric, field):
         table.append(['Domain', 
                       expt.runid + '\n mean',
                       expt.cntl.runid + '\n mean',
-                      metric['obsname'] + '\n mean',
+                      str(metric['obsname']) + '\n mean',
                       expt.runid + '\n RMS error',
                       expt.cntl.runid + '\n RMS error',
                       'RMS model difference'])
