@@ -338,7 +338,6 @@ class map_field():
         Read in variable from self.mean_file for correct levels only (if 3D field)
         Or if multi_field_function is set then get the field (e.g.) maximum from the set of fields in meanfiles
 	    '''
-        # import pdb; pdb.set_trace()
         # Get all required mean files
         if multi_field_function is None:
             files = [self.meandir + '/' + self.meanfile]
@@ -459,7 +458,6 @@ class map_field():
         # Plotting method
         method = self.items.get('contour_method', 'mesh')
 
-        #import pdb; pdb.set_trace()
         if self.cntl is None:
             self.map_self(subplot=211, projection=projection, region=region, method=method)
             if self.obs is not None:
@@ -559,7 +557,6 @@ class map_field():
         else: 
             cmap = plt.cm.RdBu_r
  
-        #import pdb; pdb.set_trace()
         diff_field = self.field-self.obs_field
         
         if self.multi_field_function=='argmax' or self.multi_field_function=='argmin':

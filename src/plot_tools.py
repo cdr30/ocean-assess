@@ -195,7 +195,7 @@ def _get_default_levels(field, nlevs=25, mnfld=None, mxfld=None, **kwargs):
 
 
 def plot_field(x, y, field, method='mesh', levels=None,
-               set_middle=False, cmap=plt.cm.jet, transform=None, **kwargs):
+               set_middle=False, cmap=plt.cm.jet, transform=None,**kwargs):
     '''
     Plot a 2D field.
         
@@ -345,15 +345,14 @@ def plot_xy_fill(lon, lat, field, projection=ccrs.PlateCarree(),
         kwargs['levels'] = _get_default_levels(field, **kwargs) 
         
     # Do the plotting   
-    plot_field(lon, lat, fld1,
-               transform=ccrs.PlateCarree(), **kwargs)
+    plot_field(lon, lat, fld1, transform=ccrs.PlateCarree(),**kwargs)
     clev = plot_field(lon2, lat, fld2,
                       transform=ccrs.PlateCarree(), **kwargs)
     
     # Set coastlines and land
     if not _is_jasmin_host():
         ax.coastlines()
-        ax.stock_img()
+        #ax.stock_img()
     
     # Axis formatting
     gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)

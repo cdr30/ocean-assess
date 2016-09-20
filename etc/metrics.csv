@@ -62,7 +62,8 @@ ssh, 1y, mean, None, global, all
 #ssh, 1y, ts,   None, global, all
 
 # MLD
-#mld, 1y, mean, None, global, all
+mld_rho, 1y, mean, None, global, all
+mld_temp, 1y, mean, None, global, all
 # mld_min, 1m, ann_min, DBM_mixed_layer_depth_var, global, all
 # mld_max, 1m, ann_max, DBM_mixed_layer_depth_var, global, all
 
